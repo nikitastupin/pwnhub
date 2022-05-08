@@ -1,1 +1,46 @@
 # pwnhub
+
+This repository contains [writings](writings), scripts, and other results of the GitHub Actions workflows vulnerabilities research.
+
+## Introduction
+
+СI/CD systems allow us to offload routine tasks from humans to machines. In order to function, these systems require access to critical parts of infrastructure: code repositories, package registries, and secrets. Thus a breach in a CI/CD system may lead to a devastating supply chain compromise. Information security engineers do their best to make CI/CD systems secure. However, do we use these systems in a secure way?
+
+This research was scoped to vulnerabilities in GitHub Actions workflows; platform vulnerabilities like [Stealing arbitrary GitHub Actions secrets](https://blog.teddykatz.com/2021/03/17/github-actions-write-access.html) were left out of scope. Finally, we analyzed only repositories belonging to bug bounty programs and vulnerability disclosure programs.
+
+In total we analyzed more than 40000 GitHub Actions workflows over the course of more than a year and half. We identified and reported more than 90 vulnerabilities most of which were accepted as Critical and High severity.
+
+## Related Work
+
+[Rojan Rijal](https://twitter.com/uraniumhacker) published a blog post on Code / Command Injection vulnerabilities in GitHub Actions workflows in [Stealing secrets from GitHub Actions](https://sites.google.com/securifyinc.com/secblogs/hacking-github-actions). Later [Jaroslav Lobačevski](https://twitter.com/yarlob) published amazing series of blog posts on Pwn Request, Code / Command Injection in workflows and hardening techniques in [Keeping your GitHub Actions and workflows secure Part 1: Preventing pwn requests](https://securitylab.github.com/research/github-actions-preventing-pwn-requests), [Keeping your GitHub Actions and workflows secure Part 2: Untrusted input](https://securitylab.github.com/research/github-actions-untrusted-input), [Keeping your GitHub Actions and workflows secure Part 3: How to trust your building blocks](https://securitylab.github.com/research/github-actions-building-blocks) respectively along with [dozens of GitHub Security Advisories](https://securitylab.github.com/advisories/).
+
+[RyotaK](https://twitter.com/ryotkak) found multiple vulnerabilities in workflow dependencies [Remote code execution in cdnjs of Cloudflare](), … and …. [Justin Steven](https://github.com/justinsteven) a found vulnerability in "check-spelling" https://github.com/justinsteven/advisories/blob/master/2021_github_actions_checkspelling_token_leak_via_advice_symlink.md that made `jekyll/jekyll`, `microsoft/terminal`, `PowerDNS/pdns` and other repositories vulnerable to unauthorized modification and secrets exfiltration.
+
+[Teddy Katz](https://twitter.com/not_an_aardvark) made several disclosures of GitHub Actions platform vulnerabilities in [Stealing arbitrary GitHub Actions secrets](https://blog.teddykatz.com/2021/03/17/github-actions-write-access.html), [How I accidentally took down GitHub Actions](https://blog.teddykatz.com/2019/11/12/github-actions-dos.html) and others.
+
+[Omer Gil](https://twitter.com/omer_gil) in [Bypassing required reviews using GitHub Actions](https://medium.com/cider-sec/bypassing-required-reviews-using-github-actions-6e1b29135cc7) presented a technique to abuse GitHub Actions to bypass some review processes by leveraging the fact that the `github-actions[bot]` user has write access to a repository.
+
+Grayson Hardaway showed how to identify vulnerabilties in GitHub Actions workflows using Semgrep in [Protect Your GitHub Actions with Semgrep
+](https://r2c.dev/blog/2021/protect-your-github-actions-with-semgrep/).
+
+[Nathan Davison](https://twitter.com/nj_dav) in [Github Actions and the threat of malicious pull requests](https://nathandavison.com/blog/github-actions-and-the-threat-of-malicious-pull-requests) discovered that CircleCI projects can be configured in a way that anyone can exfiltrate secrets with a malicious Pull Request. He also shared a non-intrusive technique to identify such vulnerabilities.
+
+[Alex Birsan](https://twitter.com/alxbrsn) published a great blog post [Dependency Confusion: How I Hacked Into Apple, Microsoft and Dozens of Other Companies](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) on abusing name collisions between packages from public npm, PyPI and RubyGems registries and private instances of these registries. Later [Kamil Vavra](https://twitter.com/vavkamil) and [Gal Nagli](https://twitter.com/naglinagli) expanded dependecy confusion topic to WordPress plugins in [WordPress Plugin Confusion: How an update can get you pwned](https://vavkamil.cz/2021/11/25/wordpress-plugin-confusion-update-can-get-you-pwned/) and [Wordpress Plugin Update Confusion - The full guide how to scan and mitigate the next big Supply Chain Attack](https://galnagli.com/Wordpress_Plugin_Update_Confusion/).
+
+## Acknowledgments
+
+Thank you for providing a peer review:
+
+- Alexey Pakharev
+- [Innokentii Sennovskii](https://twitter.com/rumata888)
+- [Mikhail Egorov](https://twitter.com/0ang3el)
+
+The research team:
+
+- Artem Mikheev
+- Danila Stupin
+- [Ilya Tsaturov](https://twitter.com/itsaturov)
+- [Mikhail Egorov](https://twitter.com/0ang3el)
+- Nikita Stupin
+
+Finally, we are very grateful to all other people who supported us directly or indirectly through their virtuous activities.
