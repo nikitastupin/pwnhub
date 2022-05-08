@@ -1,6 +1,8 @@
 # pwnhub
 
-This repository contains [writings](writings), scripts, and other results of the GitHub Actions workflows vulnerabilities research.
+This repository contains [writings](writings), scripts, and other results of the GitHub Actions workflows vulnerabilities research. Down below you can find the list of writings, [general description of the research](https://github.com/nikitastupin/pwnhub#introduction), [related work](https://github.com/nikitastupin/pwnhub#related-work), and [acknowledgments](https://github.com/nikitastupin/pwnhub#acknowledgments). The results will be published gradually with each writing covering a specific topic.
+
+- [Pwn Request via a non-default branch](writings/pwn-request-via-non-default-branch.md)
 
 ## Introduction
 
@@ -8,7 +10,7 @@ This repository contains [writings](writings), scripts, and other results of the
 
 This research was scoped to vulnerabilities in GitHub Actions workflows; platform vulnerabilities like [Stealing arbitrary GitHub Actions secrets](https://blog.teddykatz.com/2021/03/17/github-actions-write-access.html) were left out of scope. Finally, we analyzed only repositories belonging to bug bounty programs and vulnerability disclosure programs.
 
-In total we analyzed more than 40000 GitHub Actions workflows over the course of more than a year and half. We identified and reported more than 90 vulnerabilities most of which were accepted as Critical and High severity.
+In total we analyzed more than 40000 GitHub Actions workflows over the course of more than a year and half. We identified and reported more than 90 vulnerabilities most of which were accepted as Critical and High severity. We also found new variants of Pwn Request and Code / Command Injection vulnerabilities in GitHub Actions workflows and new types of vulnerabilities.
 
 ## Related Work
 
@@ -29,7 +31,7 @@ Grayson Hardaway showed how to identify vulnerabilties in GitHub Actions workflo
 
 ## Acknowledgments
 
-Thank you for providing a peer review:
+Thank you for providing peer reviews:
 
 - Alexey Pakharev
 - [Innokentii Sennovskii](https://twitter.com/rumata888)
