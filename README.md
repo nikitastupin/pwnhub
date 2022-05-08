@@ -43,6 +43,6 @@ The research team:
 - Danila Stupin
 - [Ilya Tsaturov](https://twitter.com/itsaturov)
 - [Mikhail Egorov](https://twitter.com/0ang3el)
-- Nikita Stupin
+- [Nikita Stupin](https://twitter.com/_nikitastupin)
 
 Finally, we are very grateful to all other people who supported us directly or indirectly through their virtuous activities.
