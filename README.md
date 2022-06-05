@@ -5,6 +5,24 @@ This repository contains [writings](writings), scripts, and other results of the
 - [Pwn Request via a non-default branch](writings/pwn-request-via-non-default-branch.md)
 - [Exfiltration of organization level secrets](writings/org-level-secrets.md)
 
+## Acknowledgments
+
+Thank you for providing peer reviews:
+
+- Alexey Pakharev
+- [Innokentii Sennovskii](https://twitter.com/rumata888)
+- [Mikhail Egorov](https://twitter.com/0ang3el)
+
+The research team:
+
+- Artem Mikheev
+- Danila Stupin
+- [Ilya Tsaturov](https://twitter.com/itsaturov)
+- [Mikhail Egorov](https://twitter.com/0ang3el)
+- [Nikita Stupin](https://twitter.com/_nikitastupin)
+
+Finally, we are very grateful to all other people who supported us directly or indirectly through their virtuous activities.
+
 ## Introduction
 
 СI/CD systems allow us to offload routine tasks from humans to machines. In order to function, these systems require access to critical parts of infrastructure: code repositories, package registries, and secrets. Thus a breach in a CI/CD system may lead to a devastating supply chain compromise. Information security engineers do their best to make CI/CD systems secure. However, do we use these systems in a secure way?
@@ -30,20 +48,3 @@ Grayson Hardaway showed how to identify vulnerabilties in GitHub Actions workflo
 
 [Alex Birsan](https://twitter.com/alxbrsn) published a great blog post [Dependency Confusion: How I Hacked Into Apple, Microsoft and Dozens of Other Companies](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) on abusing name collisions between packages from public npm, PyPI and RubyGems registries and private instances of these registries. Later [Kamil Vavra](https://twitter.com/vavkamil) and [Gal Nagli](https://twitter.com/naglinagli) expanded dependecy confusion topic to WordPress plugins in [WordPress Plugin Confusion: How an update can get you pwned](https://vavkamil.cz/2021/11/25/wordpress-plugin-confusion-update-can-get-you-pwned/) and [Wordpress Plugin Update Confusion - The full guide how to scan and mitigate the next big Supply Chain Attack](https://galnagli.com/Wordpress_Plugin_Update_Confusion/).
 
-## Acknowledgments
-
-Thank you for providing peer reviews:
-
-- Alexey Pakharev
-- [Innokentii Sennovskii](https://twitter.com/rumata888)
-- [Mikhail Egorov](https://twitter.com/0ang3el)
-
-The research team:
-
-- Artem Mikheev
-- Danila Stupin
-- [Ilya Tsaturov](https://twitter.com/itsaturov)
-- [Mikhail Egorov](https://twitter.com/0ang3el)
-- [Nikita Stupin](https://twitter.com/_nikitastupin)
-
-Finally, we are very grateful to all other people who supported us directly or indirectly through their virtuous activities.
