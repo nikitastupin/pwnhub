@@ -4,6 +4,8 @@ It is possible to exfiltrate [organization level secrets](https://docs.github.co
 
 One way to exfiltrate organization level secrets is to exfiltrate the `GITHUB_TOKEN` and create a new workflow which would reference and print the secrets. This workflow can be created in any branch of the repository. Finally, to actually exfiltrate the secrets one triggers the workflow.
 
+Only organization admins can view the list of organization level secrets. However, it is possible to brute-force the secrets' names by referencing them in the malicious workflow. If a secret doesn't exist, it just prints the empty line. Also, it is possible to grep all public repositories of the organization with the `\${{ *secrets\.[^ ]+ *}}` regex to obtain secrets' names (some of the names might be repository level but others might be organization level).
+
 ## Example
 
 ### Environment setup
@@ -27,3 +29,4 @@ Perform the following steps as the attacker.
     ```
 1. Open another pull request from the to the `org-level-secrets` repository to trigger the workflow.
 1. The double-base64-encoded `MYSECRET` secret should appear in workflow run logs.
+
