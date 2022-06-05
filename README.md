@@ -3,6 +3,7 @@
 This repository contains [writings](writings), scripts, and other results of the GitHub Actions workflows vulnerabilities research. Down below you can find the list of writings, [general description of the research](https://github.com/nikitastupin/pwnhub#introduction), [related work](https://github.com/nikitastupin/pwnhub#related-work), and [acknowledgments](https://github.com/nikitastupin/pwnhub#acknowledgments). The results will be published gradually with each writing covering a specific topic.
 
 - [Pwn Request via a non-default branch](writings/pwn-request-via-non-default-branch.md)
+- [Exfiltration of organization level secrets](writings/org-level-secrets.md)
 
 ## Introduction
 
