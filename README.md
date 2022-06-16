@@ -7,7 +7,7 @@ This repository contains [writings](writings), scripts, and other results of the
 
 ## Acknowledgments
 
-Thank you for providing peer reviews:
+Thank you for peer reviewing the original research paper (not yet published):
 
 - Alexey Pakharev
 - [Innokentii Sennovskii](https://twitter.com/rumata888)
@@ -33,7 +33,9 @@ In total we analyzed more than 40000 GitHub Actions workflows over the course of
 
 ## Related Work
 
-[Rojan Rijal](https://twitter.com/uraniumhacker) published a blog post on Code / Command Injection vulnerabilities in GitHub Actions workflows in [Stealing secrets from GitHub Actions](https://sites.google.com/securifyinc.com/secblogs/hacking-github-actions). Later [Jaroslav Lobačevski](https://twitter.com/yarlob) published an amazing series of blog posts on Pwn Request, Code / Command Injection in workflows and hardening techniques in [Keeping your GitHub Actions and workflows secure Part 1: Preventing pwn requests](https://securitylab.github.com/research/github-actions-preventing-pwn-requests), [Keeping your GitHub Actions and workflows secure Part 2: Untrusted input](https://securitylab.github.com/research/github-actions-untrusted-input), [Keeping your GitHub Actions and workflows secure Part 3: How to trust your building blocks](https://securitylab.github.com/research/github-actions-building-blocks) respectively along with [dozens of GitHub Security Advisories](https://securitylab.github.com/advisories/).
+[Rojan Rijal](https://twitter.com/uraniumhacker) published a blog post on Code / Command Injection vulnerabilities in GitHub Actions workflows in [Stealing secrets from GitHub Actions](https://sites.google.com/securifyinc.com/secblogs/hacking-github-actions).
+
+Later [Jaroslav Lobačevski](https://twitter.com/yarlob) published an amazing series of blog posts on Pwn Request, Code / Command Injection in workflows and hardening techniques in [Keeping your GitHub Actions and workflows secure Part 1: Preventing pwn requests](https://securitylab.github.com/research/github-actions-preventing-pwn-requests), [Keeping your GitHub Actions and workflows secure Part 2: Untrusted input](https://securitylab.github.com/research/github-actions-untrusted-input), [Keeping your GitHub Actions and workflows secure Part 3: How to trust your building blocks](https://securitylab.github.com/research/github-actions-building-blocks) respectively along with [dozens of GitHub Security Advisories](https://securitylab.github.com/advisories/).
 
 In [GitHub Actions check-spelling community workflow - GITHUB_TOKEN leakage via advice.txt symlink](https://github.com/justinsteven/advisories/blob/master/2021_github_actions_checkspelling_token_leak_via_advice_symlink.md) by [Justin Steven](https://github.com/justinsteven) a vulnerability in the [check-spelling/check-spelling](https://github.com/check-spelling/check-spelling) dependency action rather than a workflow itself was described. This vulnerability made `jekyll/jekyll`, `microsoft/terminal`, `PowerDNS/pdns` and other repositories vulnerable to unauthorized modification and secrets exfiltration. Also, [RyotaK](https://twitter.com/ryotkak) in [Remote code execution in Homebrew by compromising the official Cask repository](https://blog.ryotak.me/post/homebrew-security-incident-en/) described another vulnerability which was not in the workflow itself but in a dependency.
 
