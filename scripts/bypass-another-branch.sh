@@ -12,6 +12,7 @@ info() {
 if [[ $# -ne 1 ]]; then
   echo "usage: $0 repo" >&2
   echo "  repo  local path to git repository" >&2
+  exit 1
 fi
 
 info "logging to $PATH_TO_LOG"
