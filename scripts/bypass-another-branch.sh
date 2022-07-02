@@ -2,6 +2,7 @@
 
 PATH_TO_REPO="$1"
 PATH_TO_LOG="$(mktemp)"
+OUTPUT_DIR="$(mktemp -d)"
 
 
 info() {
@@ -16,6 +17,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 info "logging to $PATH_TO_LOG"
+info "output directory: $OUTPUT_DIR"
 
 git -C "$PATH_TO_REPO" branch --all | grep -F 'remotes/origin' | cut -d ' ' -f 3 | while read branch; do
   git -C "$PATH_TO_REPO" checkout "$branch" &> /dev/null
@@ -24,7 +26,7 @@ git -C "$PATH_TO_REPO" branch --all | grep -F 'remotes/origin' | cut -d ' ' -f 3
   ls "$PATH_TO_REPO/.github/workflows" | while read workflow; do
     workflow_path="$PATH_TO_REPO/.github/workflows/$workflow"
     shasum "$workflow_path" >> "$PATH_TO_LOG"
-    cat "$workflow_path" > $(shasum "$workflow_path" | cut -f 1 -d ' ')
+    cat "$workflow_path" > "$OUTPUT_DIR/$(shasum "$workflow_path" | cut -f 1 -d ' ')"
   done
 done
 
