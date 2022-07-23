@@ -21,7 +21,7 @@ if [[ $# -ne 1 ]]; then
   exit 1
 fi
 
-LOCAL_REPO="$(realpath "$1")"
+LOCAL_REPO="$1"
 
 if [[ ! -d "$LOCAL_REPO/.git" ]]; then
   error "$LOCAL_REPO is not git repository"
