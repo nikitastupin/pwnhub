@@ -15,13 +15,13 @@ help() {
 
 if [[ $# -ne 1 ]]; then
   help "usage: $0 repo"
-  help "  repo    local path to git repository"
+  help "  repo    path to local git repository"
   help
   help "outputs list of unique workflow files found in all *remote* branches of the repo"
   exit 1
 fi
 
-LOCAL_REPO="$1"
+LOCAL_REPO="$(realpath "$1")"
 
 if [[ ! -d "$LOCAL_REPO/.git" ]]; then
   error "$LOCAL_REPO is not git repository"
