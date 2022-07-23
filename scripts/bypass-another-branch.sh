@@ -1,32 +1,53 @@
 #!/bin/bash
 
-PATH_TO_REPO="$1"
-PATH_TO_LOG="$(mktemp)"
-OUTPUT_DIR="$(mktemp -d)"
-
-
 info() {
-    echo "info: $1" >&2
+  echo "info: $1" >&2
+}
+
+error() {
+  echo "error: $1" >&2
+}
+
+help() {
+  echo "$1" >&2
 }
 
 
 if [[ $# -ne 1 ]]; then
-  echo "usage: $0 repo" >&2
-  echo "  repo  local path to git repository" >&2
+  help "usage: $0 repo"
+  help "  repo    local path to git repository"
+  help
+  help "outputs list of unique workflow files found in all *remote* branches of the repo"
   exit 1
 fi
 
-info "logging to $PATH_TO_LOG"
-info "output directory: $OUTPUT_DIR"
+LOCAL_REPO="$1"
 
-git -C "$PATH_TO_REPO" branch --all | grep -F 'remotes/origin' | cut -d ' ' -f 3 | while read branch; do
-  git -C "$PATH_TO_REPO" checkout "$branch" &> /dev/null
-  echo "$branch" >> "$PATH_TO_LOG"
+if [[ ! -d "$LOCAL_REPO/.git" ]]; then
+  error "$LOCAL_REPO is not git repository"
+  exit 2
+fi
 
-  ls "$PATH_TO_REPO/.github/workflows" | while read workflow; do
-    workflow_path="$PATH_TO_REPO/.github/workflows/$workflow"
-    shasum "$workflow_path" >> "$PATH_TO_LOG"
-    cat "$workflow_path" > "$OUTPUT_DIR/$(shasum "$workflow_path" | cut -f 1 -d ' ')"
+OUTPUT_DIR="$(mktemp -d)"
+HASH_DIR="$(mktemp -d)"
+
+git -C "$LOCAL_REPO" branch --remotes | grep -vF 'HEAD ->' | cut -d ' ' -f 3 | while read branch; do
+  mkdir -p "$OUTPUT_DIR/$branch/.github/workflows"
+
+  git -C "$LOCAL_REPO" checkout --quiet "$branch"
+
+  find "$LOCAL_REPO/.github/workflows" -type f | grep -E '\.ya?ml$' | while read file; do
+    cp "$file" "$OUTPUT_DIR/$branch/.github/workflows"
   done
 done
 
+find "$OUTPUT_DIR" -type f | grep -E '\.ya?ml$' | while read file; do
+  hash="$HASH_DIR/$(shasum "$file" | cut -d ' ' -f 1)"
+  if test -f "$hash"; then
+    rm "$file"
+  else
+    touch "$hash"
+  fi
+done
+
+find "$OUTPUT_DIR" -type f
