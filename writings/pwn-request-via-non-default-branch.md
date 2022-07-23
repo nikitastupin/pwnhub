@@ -1,4 +1,4 @@
-# Pwn Request via a non-default branch
+# Pwn Request via non-default branch
 
 After reading the [Keeping your GitHub Actions and workflows secure Part 1: Preventing pwn requests](https://securitylab.github.com/research/github-actions-preventing-pwn-requests/) blog post I digged deeper into the vulnerability and found that many maintainers fall into the same pitfall while remediating the Pwn Request vulnerability. This discovery led to 8 fix bypasses immideately and several later.
 
@@ -33,6 +33,18 @@ on:
 ```
 
 The vulnerability was fixed at `master` and branches matching the `release-1.x` pattern didn't contain the vulnerable workflow thus it was not possible to run the workflow by targeting another branch so it was not possible to bypass the fix.
+
+## Example
+
+### Environment setup
+
+Run [`setup-bypass-another-branch.sh`](../scripts/setup-bypass-another-branch.sh) as the victim to create a repository with two branches. The default branch is safe while the other branch is unsafe.
+
+> You'll need [gh](https://github.com/cli/cli) installed to execute the [`setup-bypass-another-branch.sh`](../scripts/setup-bypass-another-branch.sh) script
+
+### Proof of concept
+
+> TODO: write-up the proof of concept
 
 ## Remediation
 
