@@ -38,7 +38,7 @@ git -C "$LOCAL_REPO" branch --remotes | grep -vF 'HEAD ->' | cut -d ' ' -f 3 | w
 
   if ! test -f "$LOCAL_REPO/.github/workflows"; then
     continue
-  done
+  fi
 
   find "$LOCAL_REPO/.github/workflows" -type f | grep -E '\.ya?ml$' | while read file; do
     cp "$file" "$OUTPUT_DIR/$branch/.github/workflows"
