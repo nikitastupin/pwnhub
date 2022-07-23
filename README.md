@@ -2,7 +2,7 @@
 
 This repository contains [writings](writings), [scripts](scripts), and other results of the GitHub Actions workflows vulnerabilities research.
 
-If you're new to workflow vulnerabilities, follow the [overview.md](writings/overview.md) to get started. Otherwise feel free to dive into a specific topic from the list below.
+If you're new to workflow vulnerabilities or looking for guidance, follow the [overview.md](writings/overview.md) to get started. Otherwise feel free to dive into a specific topic from the list below.
 
 - [Pwn Request via a non-default branch](writings/pwn-request-via-non-default-branch.md)
 - [Exfiltration of organization level secrets](writings/org-level-secrets.md)
