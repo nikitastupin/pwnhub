@@ -17,7 +17,7 @@ if [[ $# -ne 1 ]]; then
   help "usage: $0 repo"
   help "  repo    path to local git repository"
   help
-  help "outputs list of unique workflow files found in all *remote* branches of the repo"
+  help "outputs list of *unique* workflow files found in all *remote* branches of the repo"
   exit 1
 fi
 
@@ -36,7 +36,7 @@ git -C "$LOCAL_REPO" branch --remotes | grep -vF 'HEAD ->' | cut -d ' ' -f 3 | w
 
   git -C "$LOCAL_REPO" checkout --quiet "$branch"
 
-  if ! test -f "$LOCAL_REPO/.github/workflows"; then
+  if ! test -d "$LOCAL_REPO/.github/workflows"; then
     continue
   fi
 
