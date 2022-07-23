@@ -1,9 +1,18 @@
 # pwnhub
 
-This repository contains [writings](writings), scripts, and other results of the GitHub Actions workflows vulnerabilities research. Down below you can find the list of writings, [general description of the research](https://github.com/nikitastupin/pwnhub#introduction), [related work](https://github.com/nikitastupin/pwnhub#related-work), and [acknowledgments](https://github.com/nikitastupin/pwnhub#acknowledgments). The results will be published gradually with each writing covering a specific topic.
+This repository contains [writings](writings), [scripts](scripts), and other results of the GitHub Actions workflows vulnerabilities research.
+
+If you're new to workflow vulnerabilities, follow the [overview.md](writings/overview.md) to get started. Otherwise feel free to dive into a specific topic from the list below.
 
 - [Pwn Request via a non-default branch](writings/pwn-request-via-non-default-branch.md)
 - [Exfiltration of organization level secrets](writings/org-level-secrets.md)
+- [Related Work](https://github.com/nikitastupin/pwnhub#related-work)
+
+> :warning: this is an ongoing research and results will be published gradually
+
+## Contributing
+
+We're open to contributions! See the [contributing guide](CONTRIBUTING.md) for detailed instructions.
 
 ## Acknowledgments
 
@@ -39,14 +48,13 @@ Later [Jaroslav Lobačevski](https://twitter.com/yarlob) published an amazing se
 
 In [GitHub Actions check-spelling community workflow - GITHUB_TOKEN leakage via advice.txt symlink](https://github.com/justinsteven/advisories/blob/master/2021_github_actions_checkspelling_token_leak_via_advice_symlink.md) by [Justin Steven](https://github.com/justinsteven) a vulnerability in the [check-spelling/check-spelling](https://github.com/check-spelling/check-spelling) dependency action rather than a workflow itself was described. This vulnerability made `jekyll/jekyll`, `microsoft/terminal`, `PowerDNS/pdns` and other repositories vulnerable to unauthorized modification and secrets exfiltration. Also, [RyotaK](https://twitter.com/ryotkak) in [Remote code execution in Homebrew by compromising the official Cask repository](https://blog.ryotak.me/post/homebrew-security-incident-en/) described another vulnerability which was not in the workflow itself but in a dependency.
 
-[Teddy Katz](https://twitter.com/not_an_aardvark) made several disclosures of GitHub Actions platform vulnerabilities in [Stealing arbitrary GitHub Actions secrets](https://blog.teddykatz.com/2021/03/17/github-actions-write-access.html), [How I accidentally took down GitHub Actions](https://blog.teddykatz.com/2019/11/12/github-actions-dos.html) and others.
+[Teddy Katz](https://twitter.com/not_an_aardvark) made several disclosures of GitHub Actions platform vulnerabilities in [Stealing arbitrary GitHub Actions secrets](https://blog.teddykatz.com/2021/03/17/github-actions-write-access.html), [How I accidentally took down GitHub Actions](https://blog.teddykatz.com/2019/11/12/github-actions-dos.html) and others which inspired several techniques.
 
 [Omer Gil](https://twitter.com/omer_gil) in [Bypassing required reviews using GitHub Actions](https://medium.com/cider-sec/bypassing-required-reviews-using-github-actions-6e1b29135cc7) presented a technique to abuse GitHub Actions to bypass some review processes by leveraging the fact that the `github-actions[bot]` user has write access to a repository.
 
 Grayson Hardaway showed how to identify vulnerabilties in GitHub Actions workflows using Semgrep in [Protect Your GitHub Actions with Semgrep
-](https://r2c.dev/blog/2021/protect-your-github-actions-with-semgrep/).
+](https://r2c.dev/blog/2021/protect-your-github-actions-with-semgrep/). They also discussed the dangers of using the `ACTIONS_ALLOW_UNSECURE_COMMANDS` environment variable.
 
 [Nathan Davison](https://twitter.com/nj_dav) in [Shaking secrets out of CircleCI builds - insecure configuration and the threat of malicious pull requests](https://nathandavison.com/blog/shaking-secrets-out-of-circleci-builds) discovered that CircleCI projects can be configured in a way that anyone can exfiltrate secrets with a malicious Pull Reques. And shared a non-intrusive technique to identify such vulnerabilities. They also published his findings on GitHub Actoions vulnerabilities in [Github Actions and the threat of malicious pull requests](https://nathandavison.com/blog/github-actions-and-the-threat-of-malicious-pull-requests).
 
-[Alex Birsan](https://twitter.com/alxbrsn) published a great blog post [Dependency Confusion: How I Hacked Into Apple, Microsoft and Dozens of Other Companies](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) on abusing name collisions between packages from public npm, PyPI and RubyGems registries and private instances of these registries. Later [Kamil Vavra](https://twitter.com/vavkamil) and [Gal Nagli](https://twitter.com/naglinagli) expanded dependecy confusion topic to WordPress plugins in [WordPress Plugin Confusion: How an update can get you pwned](https://vavkamil.cz/2021/11/25/wordpress-plugin-confusion-update-can-get-you-pwned/) and [Wordpress Plugin Update Confusion - The full guide how to scan and mitigate the next big Supply Chain Attack](https://galnagli.com/Wordpress_Plugin_Update_Confusion/).
-
+[Alex Birsan](https://twitter.com/alxbrsn) published a great blog post [Dependency Confusion: How I Hacked Into Apple, Microsoft and Dozens of Other Companies](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) on abusing name collisions of public npm, PyPI and RubyGems registries. Later [Kamil Vavra](https://twitter.com/vavkamil) and [Gal Nagli](https://twitter.com/naglinagli) expanded dependecy confusion topic to WordPress plugins in [WordPress Plugin Confusion: How an update can get you pwned](https://vavkamil.cz/2021/11/25/wordpress-plugin-confusion-update-can-get-you-pwned/) and [Wordpress Plugin Update Confusion - The full guide how to scan and mitigate the next big Supply Chain Attack](https://galnagli.com/Wordpress_Plugin_Update_Confusion/). These writings helped us to develop several gadgets.
