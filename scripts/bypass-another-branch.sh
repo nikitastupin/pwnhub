@@ -32,13 +32,13 @@ OUTPUT_DIR="$(mktemp -d)"
 HASH_DIR="$(mktemp -d)"
 
 git -C "$LOCAL_REPO" branch --remotes | grep -vF 'HEAD ->' | cut -d ' ' -f 3 | while read branch; do
-  mkdir -p "$OUTPUT_DIR/$branch/.github/workflows"
-
   git -C "$LOCAL_REPO" checkout --quiet "$branch"
 
   if ! test -d "$LOCAL_REPO/.github/workflows"; then
     continue
   fi
+
+  mkdir -p "$OUTPUT_DIR/$branch/.github/workflows"
 
   find "$LOCAL_REPO/.github/workflows" -type f | grep -E '\.ya?ml$' | while read file; do
     cp "$file" "$OUTPUT_DIR/$branch/.github/workflows"
