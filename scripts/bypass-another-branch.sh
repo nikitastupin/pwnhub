@@ -31,6 +31,17 @@ fi
 OUTPUT_DIR="$(mktemp -d)"
 HASH_DIR="$(mktemp -d)"
 
+REMOTE="$(git -C "$LOCAL_REPO" remote get-url origin)"
+
+# https://github.com/dead-claudia/github-limits
+if ! echo "$REMOTE" | grep -qE '^https://github\.com/[0-9A-Za-z-]+/[0-9A-Za-z_.-]+$'; then
+  error "remote '$REMOTE' does not match regex"
+  exit 1
+fi
+
+OWNER="$(echo "$REMOTE" | cut -d / -f 4)"
+REPO="$(echo "$REMOTE" | cut -d / -f 5)"
+
 git -C "$LOCAL_REPO" branch --remotes | grep -vF 'HEAD ->' | cut -d ' ' -f 3 | while read branch; do
   git -C "$LOCAL_REPO" checkout --quiet "$branch"
 
@@ -38,10 +49,11 @@ git -C "$LOCAL_REPO" branch --remotes | grep -vF 'HEAD ->' | cut -d ' ' -f 3 | w
     continue
   fi
 
-  mkdir -p "$OUTPUT_DIR/$branch/.github/workflows"
+  out="$OUTPUT_DIR/$OWNER/$REPO/$branch/.github/workflows"
+  mkdir -p "$out"
 
   find "$LOCAL_REPO/.github/workflows" -type f | grep -E '\.ya?ml$' | while read file; do
-    cp "$file" "$OUTPUT_DIR/$branch/.github/workflows"
+    cp "$file" "$out"
   done
 done
 
