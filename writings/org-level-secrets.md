@@ -4,7 +4,7 @@ It is possible to exfiltrate [organization level secrets](https://docs.github.co
 
 One way to exfiltrate organization level secrets is to exfiltrate the `GITHUB_TOKEN` and create a new workflow which would reference and print the secrets. This workflow can be created in any branch of the repository. Finally, to actually exfiltrate the secrets one triggers the workflow.
 
-Only organization admins can view the list of organization level secrets. However, the attacker doesn't need to view the list. They can exfiltrate all secrets accessible to the workflow, including organization level secrets, at once by leveraging the [`secrets` context](https://docs.github.com/en/actions/learn-github-actions/contexts#secrets-context) as proposed by Alex Ilgayev in the "Extracting Repository And Organizational Secrets" of [How We Discovered Vulnerabilities in CI/CD Pipelines of Popular Open-Source Projects](https://cycode.com/blog/github-actions-vulnerabilities/).
+Only organization admins can view the list of organization level secrets. However, the attacker doesn't need to view the list. They can exfiltrate all secrets accessible to the workflow, including organization level secrets, at once by leveraging the [`secrets` context](https://docs.github.com/en/actions/learn-github-actions/contexts#secrets-context) as proposed by Alex Ilgayev in the "Extracting Repository And Organizational Secrets" section of [How We Discovered Vulnerabilities in CI/CD Pipelines of Popular Open-Source Projects](https://cycode.com/blog/github-actions-vulnerabilities/).
 
 ## Example
 
