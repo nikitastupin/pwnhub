@@ -50,4 +50,4 @@ So it is safe to use `if`:
 
 ## Further research
 
-What are the other ways an expression in the `if` condition can be misinterpreted?
+What are the other ways an expression in the `if` condition can be misinterpreted? Probably, the https://yaml.org/spec/1.2.2/ specification will be helpful.
