@@ -9,6 +9,7 @@ If you're new to workflow vulnerabilities or looking for guidance, follow the [o
 - [Related Work](https://github.com/nikitastupin/pwnhub#related-work)
 - [Assesing the impact](writings/assessing-impact.md)
 - [The `if` condition](writings/if-condition.md)
+- [The `GITHUB_TOKEN`](writings/github-token.md)
 
 > :warning: this is an ongoing research and results will be published gradually
 
