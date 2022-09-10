@@ -1,6 +1,6 @@
 # [DRAFT] The `if` condition
 
-The following patterns are interpreted as a string thus always equals to true.
+The following patterns are interpreted as a string thus always equal to true.
 
 ```yaml
 if: |
