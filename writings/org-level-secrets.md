@@ -1,5 +1,7 @@
 # Exfiltration of organization level secrets
 
+> WARNING: (20 April 2023) the proof of concept doesn't work now; this may be due to GitHub mitigations.
+
 It is possible to exfiltrate [organization level secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-an-organization) even if they are not referenced in the vulnerable repository. However, the access to the secrets should be granted to either all organization repositories (which is the default) or a selected set of repositories including the vulnerable repository.
 
 One way to exfiltrate organization level secrets is to exfiltrate the `GITHUB_TOKEN` and create a new workflow which would reference and print the secrets. This workflow can be created in any branch of the repository. Finally, to actually exfiltrate the secrets one triggers the workflow.
