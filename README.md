@@ -7,7 +7,7 @@ If you're new to workflow vulnerabilities or looking for guidance, follow the [o
 - [Pwn Request via non-default branch](writings/pwn-request-via-non-default-branch.md)
 - [Exfiltration of organization level secrets](writings/org-level-secrets.md)
 - [Related Work](https://github.com/nikitastupin/pwnhub#related-work)
-- [Assesing the impact](writings/assessing-impact.md)
+- [Assesing impact of GitHub Actions workflow vulnerability](writings/assessing-impact.md)
 - [The `if` condition](writings/if-condition.md)
 - [The `GITHUB_TOKEN`](writings/github-token.md)
 
