@@ -1,5 +1,8 @@
 # Assesing impact of GitHub Actions workflow vulnerability
 
+> WARNING: the latest experiment has shown that a GITHUB_TOKEN cannot trigger another workflow (e.g. with a `push` event workflow)
+> I'm going to update this post later after conducting all the tests
+
 When GitHub Actions were first introduced a vulnerability in a workflow meant that the affected repository was completely compromised: its contents could be modified; all the secrets exfiltrated, including organization-wide secrets (!); and all other parts of the repository like issues, projects, etc cloud be modified or deleted.
 
 Today is different. There are much more mitigation mechanisms available and the maintainers are more aware of them as well as the vulnerabilities in workflows. So code execution on a runner does not necessarily means critical or even high impact anymore.
