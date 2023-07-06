@@ -13,7 +13,7 @@ help() {
 }
 
 
-if [[ $# -ne 1 ]]; then
+if [ $# -ne 1 ]; then
   help "usage: $0 repo"
   help "  repo    path to local git repository"
   help
@@ -23,7 +23,7 @@ fi
 
 LOCAL_REPO="$1"
 
-if [[ ! -d "$LOCAL_REPO/.git" ]]; then
+if [ ! -d "$LOCAL_REPO/.git" ]; then
   error "$LOCAL_REPO is not git repository"
   exit 2
 fi
@@ -66,4 +66,7 @@ find "$OUTPUT_DIR" -type f | grep -E '\.ya?ml$' | while read file; do
   fi
 done
 
-find "$OUTPUT_DIR" -type f
+readonly OUTPUT_FILE="$(mktemp)"
+
+find "$OUTPUT_DIR" -type f > "$OUTPUT_FILE"
+echo "output is written to the '$OUTPUT_FILE' file"
