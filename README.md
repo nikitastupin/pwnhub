@@ -10,6 +10,7 @@ If you're new to workflow vulnerabilities or looking for guidance, follow the [o
 - [Assesing impact of GitHub Actions workflow vulnerability](writings/assessing-impact.md)
 - [The `if` condition](writings/if-condition.md)
 - [The `GITHUB_TOKEN`](writings/github-token.md)
+- [Tools](writings/tools.md)
 
 > :warning: this is an ongoing research and results will be published gradually
 
