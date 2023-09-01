@@ -1,8 +1,5 @@
 # Assesing impact of GitHub Actions workflow vulnerability
 
-> WARNING: the latest experiment has shown that a GITHUB_TOKEN cannot trigger another workflow (e.g. with a `push` event workflow)
-> I'm going to update this post later after conducting all the tests
-
 When GitHub Actions were first introduced a vulnerability in a workflow meant that the affected repository was completely compromised: its contents could be modified; all the secrets exfiltrated, including organization-wide secrets (!); and all other parts of the repository like issues, projects, etc cloud be modified or deleted.
 
 Today is different. There are much more mitigation mechanisms available and the maintainers are more aware of them as well as the vulnerabilities in workflows. So code execution on a runner does not necessarily means critical or even high impact anymore.
@@ -30,13 +27,16 @@ graph LR;
     job-outputs([Set job outputs])
 
     package-manager-token["Package manager token: npm token, PyPi token, etc"]
+
+    subgraph GITHUB_TOKEN
     permissions-actions[`actions: write` permission]
-    permissions-content[`content: write` permission]
+    permissions-contents[`contents: write` permission]
     permissions-id-token[`id-token: write` permission]
     permissions-issues[`issues: write` permission]
     permissions-pull-requests[`pull-requests: write` permission]
     permissions-releases[`releases: write` permission]
     permissions-packages[`packages: write` permission]
+    end
 
     add-label([Add `safe-to-test`-like label to pull request])
     poison-cache([Poison cache])
@@ -50,6 +50,8 @@ graph LR;
     impact-run-label-protected-workflow{{Code execution in label-protected workflow}};
     impact-modify-issues-pull-requests{{Tamper/delete issues, pull requests, comments}};
     impact-influence-another-job{{Influence another job}};
+    impact-tags{{Delete and create tags}};
+    impact-other-cicd{{Compromise Other CI/CD Systems}};
 
     pat[Personal Access Token]
  
@@ -63,25 +65,40 @@ graph LR;
     github-token -.-> permissions-releases --> impact-malicious-package;
     github-token -.-> permissions-packages --> impact-malicious-package;
     github-token -.-> permissions-actions --> run-workflow_dispatch;
-    github-token -.-> permissions-content --> push-non-protected-branch --> impact-run-workflow-push;
+    github-token -.-> permissions-contents --> push-non-protected-branch;
+    permissions-contents --> impact-tags;
+    pat -.-> impact-run-workflow-push;
     add-label --> impact-run-label-protected-workflow;
     secrets -. only if referenced .-> pat;
     secrets -. only if referenced .-> package-manager-token --> impact-malicious-package;
+    push-non-protected-branch -.-> impact-other-cicd;
 ```
 
 In the following sections the paths will be unpacked.
 
 ## The `GITHUB_TOKEN`
 
-The `GITHUB_TOKEN` secret is always passed to a workflow run. See https://gist.github.com/nikitastupin/30e525b776c409e03c2d6f328f254965 for an example of a universal exfiltration technique. By default it has read-only permissions for the repositories created after 2023-02-02. However, since most of repositories were created before 2023-02-02 it still has write permissions in many cases.
+The `GITHUB_TOKEN` secret is always passed to a workflow run. See [Universal payload for the `GITHUB_TOKEN` exfiltration](https://gist.github.com/nikitastupin/30e525b776c409e03c2d6f328f254965) for more information. By default, the `GITHUB_TOKEN` has read-only permissions for repositories created after 2023-02-02. However, since most of repositories were created before 2023-02-02 it still has write permissions in many cases.
 
-The most impactful permissions are `contents`, `id-token`, `issues`, `pull-requests`, `releases`, and `packages`. Let us take a closer look at each of them.
+(Un)fortunately, the `GITHUB_TOKEN` cannot trigger workflows with the exception of `workflow_dispatch` and `repository_dispatch` which limits the impact. See [Triggering a workflow from a workflow](https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow) for more information. Interestingly, it is not meant to be a security mitigation but functions like one.
+
+The most impactful permissions are `contents`, `id-token`, `releases`, and `packages`. Some of the less impactful permissions include `issues` and `pull-requests`. Let us take a closer look at each of them.
 
 ### `contents: wirte`
 
-It is usually not possible to use the permission to push to the default branch because of the branch-protection rules. However, there is usually a release workflow in a repository which are triggered by the `push` or `release` events. A release workflow naturally has access to package manager secrets because it needs those to publish packages.
+The `contents: wirte` permission is among the most dangerous and in general allows to:
 
-So the `GITHUB_TOKEN` with `contents: write` permission can be used to modify the contents of a non-protected branch and [publish or edit releases](https://docs.github.com/en/rest/overview/permissions-required-for-github-apps?apiVersion=2022-11-28#contents). This leads to triggering the release workflow with `GITHUB_SHA` and `GITHUB_REF` set to the non-protected branch, check out from the non-protected branch, building that leads to code execution, and finally access to a package manager secret.
+1. Push to the repository.
+1. Delete and create tags.
+1. Delete and create releases.
+
+Many projects apply branch-protection rules to the default branch so usually it is not possible to push to the default branch. Still, it is possible to modify the contents of a non-protected branch and [create, edit, or delete releases](https://docs.github.com/en/rest/overview/permissions-required-for-github-apps?apiVersion=2022-11-28#repository-permissions-for-contents).
+
+Furthermore, it is not possible to modify the contents of the `.github/workflows` directory.
+
+However, other workflow files like `.circleci/config.yml` can be modified. Since CircleCI workflows are are triggered [each time a commit is pushed on a branch that has a `.circleci/config.yml` file included](https://circleci.com/docs/triggers-overview/#run-a-pipeline-on-commit-to-your-code-repository) it is possible to push a malicious `.circleci/config.yml` to a non-protected branch. Consequtively, this will trigger a CircleCI workflow with the malicious code that exfiltrates all secrets from the CircleCI environment.
+
+If there is a `pull_request_target` workflow that does not checkout from a fork but does checkout and execute code it is possible to push malicious code to a non-protected branch and open a pull request to that branch. Since the pull request is opened with an external account it will trigger the `pull_request_target` workflow and because the target branch contains malicious code the workflow will be compromised.
 
 ### `id-token: write`
 
