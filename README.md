@@ -11,6 +11,7 @@ If you're new to workflow vulnerabilities or looking for guidance, follow the [o
 - [The `if` condition](writings/if-condition.md)
 - [The `GITHUB_TOKEN`](writings/github-token.md)
 - [Tools](writings/tools.md)
+- [How workflow run approvals work?](writings/how-workflow-run-approvals-work.md)
 
 > :warning: this is an ongoing research and results will be published gradually
 
