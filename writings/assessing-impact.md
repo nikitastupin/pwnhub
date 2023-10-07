@@ -114,6 +114,10 @@ At first glance it seems that these permissions are relatively harmless. However
 
 Another way, which I have not tested yet, is to use the permissions to modify issue body or title and run a `pull_request` workflow where these will lead to an injection vulnerability.
 
+## Further research
+
+- It might be possible to escalate from the `GITHUB_TOKEN` with `contents: write` permissions to all the repository secrets and organization-wide secrets. If other CI/CD systems are used with a GitHub repository and have push access to the repository it should be possible to (1) use the exfiltrated `GITHUB_TOKEN` to push to a non-protected branch (2) triggering another CI/CD system and (3) push back to the repository's `.github/workflows` directory with a `pull_request_target` workflow that exfiltrates all the repository secrets and organization-wide secrets. [How to push a commit back to the same repository as part of the CircleCI job](https://support.circleci.com/hc/en-us/articles/360018860473-How-to-push-a-commit-back-to-the-same-repository-as-part-of-the-CircleCI-job) - need see when and how this works.
+
 ## References
 
 - [GitHub Actions – Updating the default GITHUB_TOKEN permissions to read-only](https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/)
