@@ -69,3 +69,5 @@ Grayson Hardaway showed how to identify vulnerabilties in GitHub Actions workflo
 [0xn3va/cheat-sheets/CI CD/Github](https://github.com/0xn3va/cheat-sheets/tree/main/CI%20CD/Github) gathers knowledge about GitHub Actions workflows security. Similar to this repository.
 
 [Identifying vulnerabilities in GitHub Actions & AWS OIDC Configurations](https://medium.com/tinder/identifying-vulnerabilities-in-github-actions-aws-oidc-configurations-8067c400d5b8) is more about how AWS roles can be misconfigured but related to the GitHub Actions context.
+
+[What the fork? Imposter commits in GitHub Actions and CI/CD](https://www.chainguard.dev/unchained/what-the-fork-imposter-commits-in-github-actions-and-ci-cd) showcases a technique where you can reference malicious content from a fork even if it has not been merged. Keep in mind that it may need some sort of social engineering.
