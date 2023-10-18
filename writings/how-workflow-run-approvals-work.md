@@ -10,6 +10,8 @@ The blue note on the aforementioned page hints that `pull_request_target` workfl
 
 However, it is not only `pull_request_target` workflows that ignore these settings. In practice, approvals apply only to `pull_request` workflows. For example, `pull_request_review` will also always run.
 
+This makes sense because as described in [GitHub Actions update: Helping maintainers combat bad actors](https://github.blog/2021-04-22-github-actions-update-helping-maintainers-combat-bad-actors/) the main reason why GitHub added the approval process is because cryptominers abused GitHub Actions to mine cryptocurrency. Accidentally, this also became an additional layer of defence against some of the vulnerability types.
+
 ## Practice
 
 Navigate to the root of the repository and run the `pull-request-review.sh` script. Note that you need `gh` installed and logged in.
