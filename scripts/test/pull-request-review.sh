@@ -35,7 +35,7 @@ gh api --silent \
   -H "Accept: application/vnd.github.v3+json" \
   "/repos/$OWNER/$REPO/git/refs" \
   -f ref='refs/heads/add-readme' \
-  -f sha="$(gh api repos/nshackerone/pull-request-review/git/ref/heads/main --jq .object.sha)"
+  -f sha="$(gh api repos/$OWNER/$REPO/git/ref/heads/main --jq .object.sha)"
 
 gh api --silent \
   -X PUT "/repos/$OWNER/$REPO/contents/README.md" \
