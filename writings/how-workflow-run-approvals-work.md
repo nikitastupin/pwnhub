@@ -8,7 +8,7 @@ The workflow run approvals are described on the [Approving workflow runs from pu
 
 The blue note on the aforementioned page hints that `pull_request_target` workflows will always run, regardless of approval settings.
 
-However, it is not only `pull_request_target` workflows that ignore these settings. In practice, approvals apply only to `pull_request` workflows. For example, `pull_request_review` will also always run.
+However, it is not only `pull_request_target` workflows that ignore these settings. For example, `pull_request_review` will also ignore in some cases (TODO: test whether it ignores if both head and base are within the same repo or if a pull request was opened by a maintainer).
 
 This makes sense because as described in [GitHub Actions update: Helping maintainers combat bad actors](https://github.blog/2021-04-22-github-actions-update-helping-maintainers-combat-bad-actors/) the main reason why GitHub added the approval process is because cryptominers abused GitHub Actions to mine cryptocurrency. Accidentally, this also became an additional layer of defence against some of the vulnerability types.
 
