@@ -75,3 +75,5 @@ Grayson Hardaway showed how to identify vulnerabilties in GitHub Actions workflo
 [What the fork? Imposter commits in GitHub Actions and CI/CD](https://www.chainguard.dev/unchained/what-the-fork-imposter-commits-in-github-actions-and-ci-cd) showcases a technique where you can reference malicious content from a fork even if it has not been merged. Keep in mind that it may need some sort of social engineering.
 
 [LOTP - Living Off The Pipeline](https://boostsecurityio.github.io/lotp/) a collection of gadgets.
+
+[GITHUB ACTIONS EXPLOITATION: DEPENDABOT](https://www.synacktiv.com/publications/github-actions-exploitation-dependabot) by Hugo Vincent sharing an interesting technique that exploits workflows that automerge pull requests from Dependabot.
